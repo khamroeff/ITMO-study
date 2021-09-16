@@ -144,7 +144,6 @@
     
 
                 function CheckPoints() {
-                    console.log('click')
                     $("#errorFields").hide();
                     let R = ($("#valueR").val()).replaceAll(",", ".");
                     let X = ($("#coordinateX").val()).replaceAll(",", ".");

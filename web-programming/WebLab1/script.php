@@ -1,42 +1,33 @@
 <?php
     session_start();
-if (!isset($_SESSION['historyResults'])) {
-    $_SESSION['historyResults'] = array();
+if (!isset($_SESSION['results'])) {
+        $_SESSION['results'] = array();
 }
-$message="";
-if (isset($_POST['X'])&&isset($_POST['Y'])&&isset($_POST['R'])) {
-//запоминаем время начала работы скрипта
-    $start = microtime(true);
-//получаем дату и время по москве
-    date_default_timezone_set('Europe/Moscow');
-    $now = date("d.m.y H:i");
-//получаем параметры из index.php
 
+$answer="";
+if (isset($_POST['X'])&&isset($_POST['Y'])&&isset($_POST['R'])) {
+    $startTime = microtime(true); //Время начала
+    $now = date("d.m.y H:i");
     $X = $_POST['X'];
     $Y = $_POST['Y'];
     $R = $_POST['R'];
-
     if (
-        (($Y >= -$R / 2 && $Y <= 0) && ($X >= -$R && $X <= 0)) ||
-        ($Y >= 0 && $X >= 0 && $Y + $X <= $R / 2) ||
-        ($Y <= 0 && $X >= 0 && $Y * $Y + $X * $X <= $R * $R / 4)
-    )
-        $message = "Точка входит в область";
-    else $message = "Точка не входит в область";
-//получаем время окончания работы скрипта
-    $finish = microtime(true);
-//высчитываем время работы (разницу) и округляем
-    $timeWork = $finish - $start;
-    $timeWork = round($timeWork, 7);
-//заполняем переменную сессии для отображения всей таблицы
-    $result = array($now, $timeWork, $X, $Y, $R, $message);
-    array_push($_SESSION['historyResults'], $result);
+        (($Y <= $R && $Y >= 0) && ($X >= -$R / 2 && $X <= 0)) ||
+        ($Y <= 0 && $X >= 0 && $Y + 2 * $X <= $R / 2) ||
+        ($Y >= 0 && $X >= 0 && $Y * $Y + $X * $X <= $R * $R / 4)
+    ) $answer = "Точка входит в область";
+    else $answer = "Точка не входит в область";
+    $finishTime = microtime(true); //Время завершения
+    $workTime = $finishTime - $startTime; //Расчет времени работы
+    $workTime = round($workTime, 7);
+    $result = array($now, $workTime, $X, $Y, $R, $answer); //Заполняем переменную
+    array_push($_SESSION['results'], $result);      //сессии 
 }
-?>
-<!--Выводим сообщение о результате-->
-<h3 id="message"> <?php echo $message; ?></h3>
-<div>
-    <table class="table" id="table">
+    ?>
+    <!--Вывод-->
+    <h3 id="answer"> <?php echo $answer; ?></h3>
+    <div>
+        <table class="table" id="table">
         <thead>
             <tr>
                 <td>Дата и время запроса</td>
@@ -48,17 +39,16 @@ if (isset($_POST['X'])&&isset($_POST['Y'])&&isset($_POST['R'])) {
             </tr>
         </thead>
         <?php
-        for ($m=0;$m<sizeof($_SESSION['historyResults']);$m++){
+        for ($m=0;$m<sizeof($_SESSION['results']);$m++){
             echo "<tr>";
-            echo "<td>".$_SESSION['historyResults'][$m][0]."</td>";
-            echo "<td>".$_SESSION['historyResults'][$m][1]."</td>";
-            echo "<td>".$_SESSION['historyResults'][$m][2]."</td>";
-            echo "<td>".$_SESSION['historyResults'][$m][3]."</td>";
-            echo "<td>".$_SESSION['historyResults'][$m][4]."</td>";
-            echo "<td>".$_SESSION['historyResults'][$m][5]."</td>";
+            echo "<td>".$_SESSION['results'][$m][0]."</td>";
+            echo "<td>".$_SESSION['results'][$m][1]."</td>";
+            echo "<td>".$_SESSION['results'][$m][2]."</td>";
+            echo "<td>".$_SESSION['results'][$m][3]."</td>";
+            echo "<td>".$_SESSION['results'][$m][4]."</td>";
+            echo "<td>".$_SESSION['results'][$m][5]."</td>";
             echo "</tr>";
         }
         ?>
-    </table>
-</div>
-
+        </table>
+    </div>

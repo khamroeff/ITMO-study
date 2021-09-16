@@ -3,7 +3,7 @@
 <head>
     <title>Лабораторная работа №1 // Khamroev S.</title>
     <meta http-equiv="Content-Type" content="text/html"; charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -66,7 +66,7 @@
     </div>
              
              <div class="picture">
-                <img src="task.png">
+                <img src="img/task.png">
             </div>
             <div>
                  <p id="answer" style="display: inline" ></p>

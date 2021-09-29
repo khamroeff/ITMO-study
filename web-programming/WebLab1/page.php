@@ -134,7 +134,7 @@
                          this.value = this.value.substr(0, this.value.lastIndexOf("-"));
                     }
                 }
-                $.post("script.php")
+                $.post("backend.php")
                .done(result => $("#some-text").html(result));
                 $("#resetForm").click(function(){
                 $("#errorFields").hide();
@@ -149,7 +149,7 @@
                     let X = ($("#coordinateX").val()).replaceAll(",", ".");
                     let Y = $('input[name="Y"]:checked').val(); 
                     if (R !== "" && X !== "" && Y !== undefined) {
-                        $.post("script.php",{
+                        $.post("backend.php",{
                                 "R": R,
                                 "X": X,
                                 "Y": Y

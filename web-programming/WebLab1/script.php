@@ -4,10 +4,34 @@ if (!isset($_SESSION['results'])) {
         $_SESSION['results'] = array();
 }
 
+$options = array(
+    'options' => array(
+        'min_range' => -5,
+        'max_range' => 3,
+    )
+);
 $answer="";
 if (isset($_POST['X'])&&isset($_POST['Y'])&&isset($_POST['R'])) {
     $startTime = microtime(true); //Время начала
     $now = date("d.m.y H:i");
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_POST["R"] > 5 || $_POST["R"] < 2) {
+           $nameErr = "R is wrong";
+        }else {
+           $R = ($_POST["R"]);
+        }
+        if ($_POST["X"] > 3 || $_POST["X"] < -5) {
+            $nameErr = "X is wrong";
+         }else {
+            $X = ($_POST["X"]);
+         }
+        if (filter_var($Y, FILTER_VALIDATE_INT, $options) !== FALSE) {
+            $X = ($_POST["Y"]);
+        }else {
+            $nameErr = "Y is wrong";
+        }
+        
+    }
     $X = $_POST['X'];
     $Y = $_POST['Y'];
     $R = $_POST['R'];
@@ -23,6 +47,10 @@ if (isset($_POST['X'])&&isset($_POST['Y'])&&isset($_POST['R'])) {
     $result = array($now, $workTime, $X, $Y, $R, $answer); //Заполняем переменную
     array_push($_SESSION['results'], $result);      //сессии 
 }
+    function validate($X, $Y, $R)
+    {
+        
+    }
     ?>
     <!--Вывод-->
     <h3 id="answer"> <?php echo $answer; ?></h3>

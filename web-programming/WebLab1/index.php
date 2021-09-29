@@ -18,7 +18,7 @@
         <hr> <!--Горизонтальная линия-->
     </div>
 <div class="form">
-        <form>
+        <form action="script.php" method="POST">
             <div class="elem">
                 Координата X:
                 <label>

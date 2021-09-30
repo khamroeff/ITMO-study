@@ -4,12 +4,6 @@ if (!isset($_SESSION['results'])) {
         $_SESSION['results'] = array();
 }
 date_default_timezone_set('Europe/Moscow');
-$options = array(
-    'options' => array(
-        'min_range' => -5,
-        'max_range' => 3,
-    )
-);
 $answer="";
 $nameErr="Результат: ";
 $checkWrong=False;

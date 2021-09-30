@@ -115,10 +115,10 @@
                     this.value = this.value.replace(/[^\d\,]/g, "");//разрешаем ввод только цифр 0-9 и запятой
 
                     if (new Set().add("0").add("1").add("6").add("7").add("8").add("9").has(this.value[0])){
-                            this.value = this.value.substr(0,0)//то эта цифра должна быть от 0 до 3
+                            this.value = this.value.substr(0,0)
                         }
                     if(this.value[0]==="5" && this.value[1]!==""){
-                            this.value = this.value.substr(0, 1);//то эта цифра должна быть от 0 до 5
+                            this.value = this.value.substr(0, 1);
                          }
 
                     if(this.value.length>1 && this.value[1]!==",") this.value=this.value[0]+","+this.value[1];//если второй символ введён и он не запятая, то вставляем запятую между первым и вторым символом

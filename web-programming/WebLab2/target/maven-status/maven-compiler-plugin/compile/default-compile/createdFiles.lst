@@ -1,0 +1,5 @@
+model\Model.class
+entities\Point.class
+servlets\ControllerServlet.class
+servlets\ReloadServlet.class
+servlets\AreaCheckServlet.class

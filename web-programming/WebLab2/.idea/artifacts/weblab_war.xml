@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="weblab:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/weblab_war</output-path>
+    <root id="archive" name="weblab_war.war">
+      <element id="artifact" artifact-name="weblab:war exploded" />
+    </root>
+  </artifact>
+</component>

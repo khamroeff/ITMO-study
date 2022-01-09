@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<f:view>
+    <h:head>
+        <title>Lab 3</title>
+        <h:outputStylesheet library="styles" name="main.css"/>
+        <h:outputStylesheet library="styles" name="shots-style.css"/>
+        <h:outputStylesheet library="styles" name="form.css"/>
+        <h:outputStylesheet library="styles" name="results.css"/>
+        <h:outputScript library="scripts" name="graph.js"/>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"/>
+    </h:head>
+    <body>
+    <div id="content">
+        <div id="navigation-container-shots">
+            <h:form>
+                <h:commandButton value="На главную" styleClass="navigation-button" action="toIndex"/>
+            </h:form>
+        </div>
+        <div id="controlls">
+            <div id="form-container" class="container">
+                <h:form>
+                    <h:inputHidden id="hidden_x" value="${shotBean.XToR}"/>
+                    <h:inputHidden id="hidden_y" value="${shotBean.ytoR}"/>
+                    <h:commandButton id="hidden_submit" type="submit" action="#{shotBean.shot()}"/>
+                </h:form>
+                <h:form>
+                    <h:panelGroup id="x-group">
+                        <div id="x-value" class="field">
+                            X:
+                            <div class="button-block">
+                                <label>
+                                    <h:commandButton class="numbered-button" value="-2" action="#{shotBean.setX(-2)}">
+                                        <f:ajax execute="@this" render="@parent"/>
+                                    </h:commandButton>
+                                </label>
+                            </div>
+                            <div class="button-block">
+                                <label>
+                                    <h:commandButton class="numbered-button" value="-1.5"
+                                                     action="#{shotBean.setX(-1.5)}">
+                                        <f:ajax execute="@this" render="@parent"/>
+                                    </h:commandButton>
+                                </label>
+                            </div>
+                            <div class="button-block">
+                                <label>
+                                    <h:commandButton class="numbered-button" value="-1" action="#{shotBean.setX(-1)}">
+                                        <f:ajax execute="@this" render="@parent"/>
+                                    </h:commandButton>
+                                </label>
+                            </div>
+                            <div class="button-block">
+                                <label>
+                                    <h:commandButton class="numbered-button" value="-0.5"
+                                                     action="#{shotBean.setX(-0.5)}">
+                                        <f:ajax execute="@this" render="@parent"/>
+                                    </h:commandButton>
+                                </label>
+                            </div>
+                            <div class="button-block">
+                                <label>
+                                    <h:commandButton class="numbered-button" value="0" action="#{shotBean.setX(0)}">
+                                        <f:ajax execute="@this" render="@parent"/>
+                                    </h:commandButton>
+                                </label>
+                            </div>
+                            <div class="button-block">
+                                <label>
+                                    <h:commandButton class="numbered-button" value="0.5" action="#{shotBean.setX(0.5)}">
+                                        <f:ajax execute="@this" render="@parent"/>
+                                    </h:commandButton>
+                                </label>
+                            </div>
+                            <div class="button-block">
+                                <label>
+                                    <h:commandButton class="numbered-button" value="1" action="#{shotBean.setX(1)}">
+                                        <f:ajax execute="@this" render="@parent"/>
+                                    </h:commandButton>
+                                </label>
+                            </div>
+                            <div class="button-block">
+                                <label>
+                                    <h:commandButton class="numbered-button" value="1.5" action="#{shotBean.setX(1.5)}">
+                                        <f:ajax execute="@this" render="@parent"/>
+                                    </h:commandButton>
+                                </label>
+                            </div>
+                            <div class="button-block">
+                                <label>
+                                    <h:commandButton class="numbered-button" value="2" action="#{shotBean.setX(2)}">
+                                        <f:ajax execute="@this" render="@parent"/>
+                                    </h:commandButton>
+                                </label>
+                            </div>
+                            <div id="x-preview">
+                                <h:outputText value="#{shotBean.x}"/>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <div id="y-value" class="field">
+                        Y:
+                        <label>
+                            <h:inputText id="y-input" class="text-field"
+                                         value="#{shotBean.YStr}" validator="yValidator">
+                                <f:ajax execute="@this" render="@this"/>
+                            </h:inputText>
+                        </label>
+                        <h:message for="y-input"/>
+                    </div>
+                    <h:panelGroup id="r-group">
+                        <div id="r-value" class="field">
+                            R:
+                            <div class="checkbox-block">
+                                1 <br/>
+                                <label>
+                                    <h:selectBooleanCheckbox class="checkbox" id="checkbox-1" value="#{shotBean.r1}">
+                                        <f:ajax execute="@this" render="@all"/>
+                                    </h:selectBooleanCheckbox>
+                                </label>
+                            </div>
+                            <div class="checkbox-block">
+                                1.5 <br/>
+                                <label>
+                                    <h:selectBooleanCheckbox class="checkbox" id="checkbox-15" value="#{shotBean.r15}">
+                                        <f:ajax execute="@this" render="@all"/>
+                                    </h:selectBooleanCheckbox>
+                                </label>
+                            </div>
+                            <div class="checkbox-block">
+                                2 <br/>
+                                <label>
+                                    <h:selectBooleanCheckbox class="checkbox" id="checkbox-2" value="#{shotBean.r2}">
+                                        <f:ajax execute="@this" render="@all"/>
+                                    </h:selectBooleanCheckbox>
+                                </label>
+                            </div>
+                            <div class="checkbox-block">
+                                2.5 <br/>
+                                <label>
+                                    <h:selectBooleanCheckbox class="checkbox" id="checkbox-25" value="#{shotBean.r25}">
+                                        <f:ajax execute="@this" render="@all"/>
+                                    </h:selectBooleanCheckbox>
+                                </label>
+                            </div>
+                            <div class="checkbox-block">
+                                3 <br/>
+                                <label>
+                                    <h:selectBooleanCheckbox class="checkbox" id="checkbox-3" value="#{shotBean.r3}">
+                                        <f:ajax execute="@this" render="@all"/>
+                                    </h:selectBooleanCheckbox>
+                                </label>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <h:commandButton class="fire-button" type="submit" value="FIRE!" action="#{shotBean.shot()}">
+                    </h:commandButton>
+                    <h:commandButton class="clear-button" value="Отчистить таблицу" action="#{listBean.clear}">
+                        <f:ajax execute="@this" render="@all"/>
+                    </h:commandButton>
+                </h:form>
+            </div>
+            <div id="image-container" class="container">
+                <img id="background" src="${shotBean.getImagePath()}" alt="image failed"/>
+                <canvas id="canvas">
+
+                </canvas>
+            </div>
+        </div>
+        <br/>
+        <h:panelGroup id="display-panel">
+            <p class="errorDisplay">
+                <h:outputText value="${shotBean.error}"/>
+            </p>
+
+            <br/>
+            <h:dataTable value="#{listBean.shots}" var="shot"
+                         styleClass="results-table"
+                         headerClass="table-header">
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    ${shot.x}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    ${shot.y}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    ${shot.r}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Дата и Время</f:facet>
+                    ${shot.requestTimeString}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Время Обработки</f:facet>
+                    ${shot.getProcessingTimeString()}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Попал ?</f:facet>
+                    ${shot.isSuccessString()}
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+    </div>
+    </body>
+    <script>
+        init();
+        <c:set var="shots" value="${listBean.getShots()}"/>
+        <c:forEach items="${shots}" var="shot">
+            addShot(${shot.x}, ${shot.y}, ${shot.r}, ${shot.success});
+        </c:forEach>
+        drawDots();
+    </script>
+</f:view>
+</html>

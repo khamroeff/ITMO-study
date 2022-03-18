@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 
 public class ShotBean implements Serializable {
     private static final float NANOSECONDS_IN_SECOND = 1000000000f;
-    private static final String IMAGE_PATH_FORMAT = "../resources/images/3r%d.png";
+//    private static final String IMAGE_PATH_FORMAT = "../resources/images/3r%d.png";
     private Float y;
     private Float x;
-    private Float r;
+    private Float r = 2.0f;
     private Float xToR;
     private Float ytoR;
     private boolean success;
@@ -150,7 +150,7 @@ public class ShotBean implements Serializable {
         String sessionIdStr = session.getId();
         sessionId = sessionIdStr.hashCode();
         System.out.println("shot method triggered");
-        r = getRSelected();
+//        r = getRSelected();
         System.out.println(r);
         error = ShotValidation.validate(this);
         System.out.println(error);
@@ -172,16 +172,14 @@ public class ShotBean implements Serializable {
     }
 
     boolean checkShot(float x, float y) {
-        if (x > 0) {
-            if (y > 0) return false;
-            else return x <= 1 && y >= -0.5;
-        } else {
-            if (y > 0) {
-                return y <= x + 0.5;
-            } else {
-                return x*x + y*y <= 0.25;
-            }
-        }
+        boolean result = false;
+        if (x >= 0 && y >= 0)
+            result = x <= r / 2 && y <= r;
+        else if (x <= 0 && y >= 0)
+            result = r + x > y;
+        else if (x <= 0 && y <= 0)
+            result = Math.sqrt(x * x + y * y) <= r / 2;
+        return result;
     }
 
     public boolean isSuccess() {
@@ -200,7 +198,7 @@ public class ShotBean implements Serializable {
         return r;
     }
 
-    public void setR(float r) {
+    public void setR(Float r) {
         this.r = r;
     }
 
@@ -244,12 +242,12 @@ public class ShotBean implements Serializable {
         }
     }
 
-    public String getImagePath() {
-        r = getRSelected();
-        String res = String.format(IMAGE_PATH_FORMAT, (int)((r != null ? r : 1) * 10));
-        System.err.println(res);
-        return res;
-    }
+//    public String getImagePath() {
+//        r = getRSelected();
+//        String res = String.format(IMAGE_PATH_FORMAT, (int)((r != null ? r : 1) * 10));
+//        System.err.println(res);
+//        return res;
+//    }
 
     public long getSessionId() {
         return sessionId;

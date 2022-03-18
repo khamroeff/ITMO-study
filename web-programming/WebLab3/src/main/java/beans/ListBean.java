@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListBean implements Serializable {
-    ShotDAO shotDAO = new ShotDAO();
+    private ShotDAO shotDAO = new ShotDAO();
     public List<Shot> getShots() {
         FacesContext fCtx = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(true);

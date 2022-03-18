@@ -69,7 +69,8 @@ input {
 }
 
 #x-preview {
-    margin: 10px 5px 5px;
+    color: white;
+    margin: 1px 1px 1px;
 }
 
 .fire-button {

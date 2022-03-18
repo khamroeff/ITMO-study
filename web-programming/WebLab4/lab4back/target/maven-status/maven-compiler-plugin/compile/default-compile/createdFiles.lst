@@ -1,0 +1,8 @@
+com\cat\lab4back\rest\Lab4App.class
+com\cat\lab4back\models\Point.class
+com\cat\lab4back\providers\CORSFilter.class
+com\cat\lab4back\tools\DBCommunicatorPoints.class
+com\cat\lab4back\models\UserEntry.class
+com\cat\lab4back\rest\PointsService.class
+com\cat\lab4back\tools\DBCommunicatorUsers.class
+com\cat\lab4back\rest\UserService.class
